@@ -1,0 +1,46 @@
+[project]
+name = "acestep_cli"
+version = "0.1.0"
+description = "Dedicated worker runtime for the music video app"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "ace-step",
+    "aiofiles>=22,<25",
+    "fastapi>=0.135.1",
+    "google-cloud-storage>=3.9.0",
+    "httpx>=0.28.1",
+    "librosa>=0.11.0",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.3",
+    "pillow>=12.1.1",
+    "python-dotenv>=1.2.2",
+    "python-multipart>=0.0.22",
+    "supabase>=2.28.3",
+    "uvicorn[standard]>=0.42.0",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+ace-step = { path = "./ACE-Step-1.5" }
+nano-vllm = { path = "./ACE-Step-1.5/acestep/third_parts/nano-vllm" }
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32' or (sys_platform == 'linux' and platform_machine == 'x86_64')" },
+    { index = "pytorch-cu130", marker = "sys_platform == 'linux' and platform_machine == 'aarch64'" },
+]
+torchvision = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32' or (sys_platform == 'linux' and platform_machine == 'x86_64')" },
+    { index = "pytorch-cu130", marker = "sys_platform == 'linux' and platform_machine == 'aarch64'" },
+]
+torchaudio = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'win32' or (sys_platform == 'linux' and platform_machine == 'x86_64')" },
+    { index = "pytorch-cu130", marker = "sys_platform == 'linux' and platform_machine == 'aarch64'" },
+]
