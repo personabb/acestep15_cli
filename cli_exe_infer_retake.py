@@ -66,7 +66,7 @@ from cli_exe_infer_utils.task_type_fix import force_text2music_task_type
 
 # infer_sft.py / infer_repaint.py で生成したセッションフォルダ
 # 例: './output/20260405_120000'
-SOURCE_SESSION_DIR = "./output/20260413_004941"
+SOURCE_SESSION_DIR = "./output/20260419_021451"
 
 # 元トラックのインデックス（1-origin）
 SOURCE_TRACK_INDEX = 1
@@ -97,7 +97,9 @@ RETAKE_LYRICS  = None   # str or None
 RETAKE_SEED: int | list[int] | tuple[int, ...] = 2392007026
 
 # 再生成区間（秒）。None で全体、リストで区間指定
-REPAINTING_REGIONS = [{"start": 107.0, "end": 111.0}]
+REPAINTING_REGIONS = [
+    {"start": 100.0, "end": 102.5}
+    ]
 
 # ============================================================
 # 共通モデル設定
