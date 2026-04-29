@@ -89,6 +89,22 @@ def build_repaint_mask(
     return repaint_mask
 
 
+def mix_source_latents_into_noise(
+    *,
+    noise: torch.Tensor,
+    source_latents: torch.Tensor,
+    mix_ratio: float,
+) -> torch.Tensor:
+    """Blend source latents across the full latent tensor."""
+    ratio = float(mix_ratio)
+    if ratio < 0.0 or ratio > 1.0:
+        raise ValueError("source_latent_mix_ratio must be between 0.0 and 1.0")
+    if ratio == 0.0:
+        return noise
+    source_like = source_latents.to(device=noise.device, dtype=noise.dtype)
+    return noise * (1.0 - ratio) + source_like * ratio
+
+
 def apply_source_latent_bias_to_noise(
     *,
     noise: torch.Tensor,
